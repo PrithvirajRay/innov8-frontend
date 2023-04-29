@@ -1,10 +1,38 @@
 import React from "react";
+import Link from "next/link";
 
-function Login() {
+type LoginProps = {
+  changeAuth: () => void;
+  triggerLoginState: () => void;
+};
+
+function Login({ changeAuth, triggerLoginState }: LoginProps) {
+  const [email, setEmail] = React.useState("");
+  const [password, setPassword] = React.useState("");
+
+  // hit the login api and get the token and store it in local storage
+  const submitHandler = async () => {
+    const res = await fetch("http://localhost:8000/api/auth/login", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ email: email, password: password }),
+    });
+    const data = await res.json();
+    console.log(data);
+    if (data.status === "error") {
+      alert(data.message);
+    } else {
+      localStorage.setItem("token", data.token);
+      triggerLoginState();
+    }
+  };
+
   return (
     <section className="bg-gray-50 dark:bg-gray-900">
       <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
-        <a
+        <Link
           href="#"
           className="flex items-center mb-6 text-2xl font-semibold text-gray-900 dark:text-white"
         >
@@ -14,7 +42,7 @@ function Login() {
             alt="logo"
           />
           Inno8
-        </a>
+        </Link>
         <div className="w-full bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">
           <div className="p-6 space-y-4 md:space-y-6 sm:p-8">
             <h1 className="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
@@ -31,6 +59,8 @@ function Login() {
                 <input
                   type="email"
                   name="email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
                   id="email"
                   className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                   placeholder="name@company.com"
@@ -47,6 +77,8 @@ function Login() {
                   type="password"
                   name="password"
                   id="password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
                   placeholder="••••••••"
                   className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                 />
@@ -70,24 +102,24 @@ function Login() {
                     </label>
                   </div>
                 </div>
-                <a
+                <Link
                   href="#"
                   className="text-sm font-medium text-primary-600 hover:underline dark:text-primary-500"
                 >
                   Forgot password?
-                </a>
+                </Link>
               </div>
-              <button
-                type="submit"
-                className="w-full text-white bg-primary-600 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
+              <div
+                onClick={submitHandler}
+                className="w-full text-white bg-primary-600 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800 cursor-pointer"
               >
                 Sign in
-              </button>
+              </div>
               <p className="text-sm font-light text-gray-500 dark:text-gray-400">
                 Don’t have an account yet?{" "}
                 <a
-                  href="/register"
-                  className="font-medium text-primary-600 hover:underline dark:text-primary-500"
+                  onClick={changeAuth}
+                  className="font-medium text-primary-600 hover:underline dark:text-primary-500 cursor-pointer"
                 >
                   Sign up
                 </a>
