@@ -1,0 +1,1 @@
+export const URL = "https://innov8-flame.vercel.app";

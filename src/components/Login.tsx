@@ -1,5 +1,7 @@
 import React from "react";
 import Link from "next/link";
+import { URL } from "@/Constants";
+
 
 type LoginProps = {
   changeAuth: () => void;
@@ -12,7 +14,7 @@ function Login({ changeAuth, triggerLoginState }: LoginProps) {
 
   // hit the login api and get the token and store it in local storage
   const submitHandler = async () => {
-    const res = await fetch("http://localhost:8000/api/auth/login", {
+    const res = await fetch(`${URL}/api/auth/login`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

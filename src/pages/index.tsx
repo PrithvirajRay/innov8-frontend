@@ -1,3 +1,4 @@
+import { URL } from "@/Constants";
 import Footer from "@/components/Dashboard/Footer";
 import Navbar from "@/components/Dashboard/Navbar";
 import Projects from "@/components/Dashboard/Projects";
@@ -21,17 +22,15 @@ export default function Home({ triggerLoginState }: Props) {
     console.log("this is token", token);
     if (token) {
       const retriveProjects = async () => {
-        const res = await fetch(
-          "http://localhost:8000/api/project/get-all-projects",
-          {
-            method: "GET",
-            headers: {
-              "Content-Type": "application/json",
-              Authorization: `Bearer ${token}`,
-            },
-          }
-        );
-        const data = await res.json();JSON.stringify(data.projects);
+        const res = await fetch(`${URL}/api/project/get-all-projects`, {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+        });
+        const data = await res.json();
+        JSON.stringify(data.projects);
         const dataProjects = JSON.parse(JSON.stringify(data.projects));
         console.log("this is data", dataProjects);
         setProjects(dataProjects);

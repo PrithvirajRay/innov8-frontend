@@ -2,6 +2,7 @@ import React from "react";
 import Link from "next/link";
 import Success from "./Modals/Success";
 import { useRouter } from "next/router";
+import { URL } from "@/Constants";
 
 type RegisterProps = {
   changeAuth: () => void;
@@ -26,7 +27,7 @@ function Register({ changeAuth }: RegisterProps) {
       return;
     }
     // TODO: Add API call to register user
-    const res = await fetch("http://localhost:8000/api/auth/register", {
+    const res = await fetch(`${URL}/api/auth/register`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
