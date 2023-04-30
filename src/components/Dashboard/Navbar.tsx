@@ -1,7 +1,11 @@
 import React from "react";
 import Link from "next/link";
 
-function Navbar() {
+interface Props {
+  logOut: () => void;
+}
+
+function Navbar({ logOut }: Props) {
   return (
     <nav className="bg-white border-gray-200 dark:bg-gray-900">
       <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
@@ -70,12 +74,13 @@ function Navbar() {
                 </Link>
               </li>
               <li>
-                <Link
-                  href="#"
-                  className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
+                <div
+                  // href="#"
+                  onClick={logOut}
+                  className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white cursor-pointer"
                 >
                   Sign out
-                </Link>
+                </div>
               </li>
             </ul>
           </div>

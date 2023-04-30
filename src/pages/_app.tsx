@@ -21,7 +21,7 @@ export default function App({ Component, pageProps }: AppProps) {
   // Check if the user is logged in or not
   React.useEffect(() => {
     const token = localStorage.getItem("token");
-    if (token) {
+    if (token!=undefined && token!=null) {
       setIsLogin(true);
     } else {
       setIsLogin(false);
@@ -31,7 +31,7 @@ export default function App({ Component, pageProps }: AppProps) {
   return (
     <>
       {isLogin ? (
-        <Component {...pageProps} />
+        <Component {...pageProps} triggerLoginState={triggerLoginState}/>
       ) : (
         <>
           {authAdd === "login" ? (
