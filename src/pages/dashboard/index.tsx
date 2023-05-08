@@ -13,12 +13,16 @@ function Dashboard() {
   }
 
   return (
-    <div className="bg-gray-50 dark:bg-gray-900">
+    <div className="bg-gray-50 dark:bg-gray-900 h-screen">
       {isLoaded && isSignedIn ? (
         <>
-          <Navbar />
+          <div className="">
+            <Navbar />
+          </div>
           <Projects />
-          <Footer/>
+          <div className="">
+            <Footer />
+          </div>
         </>
       ) : (
         <></>

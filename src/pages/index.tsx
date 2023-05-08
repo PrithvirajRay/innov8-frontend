@@ -4,7 +4,7 @@ import React from "react";
 
 function Home() {
   return (
-    <section className="bg-white dark:bg-gray-900 flex justify-center items-center">
+    <section className="bg-white dark:bg-gray-900 flex justify-center items-center w-screen h-screen">
       <div className="py-8 px-4 mx-auto max-w-screen-xl text-center lg:py-16 lg:px-12">
         <a
           href="#"

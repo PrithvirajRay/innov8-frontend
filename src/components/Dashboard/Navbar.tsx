@@ -3,7 +3,6 @@ import Link from "next/link";
 import { UserButton } from "@clerk/nextjs";
 
 function Navbar() {
-
   const toggleMenu = () => {
     const menu = document.getElementById("mobile-menu-2");
     menu?.classList.toggle("hidden");
@@ -24,7 +23,10 @@ function Navbar() {
         </Link>
         <div className="flex items-center md:order-2">
           {/* <!-- Dropdown menu --> */}
-          <UserButton />
+          <div className="mx-1">
+            <UserButton />
+          </div>
+
           <button
             onClick={toggleMenu}
             type="button"
