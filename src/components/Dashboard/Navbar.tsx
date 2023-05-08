@@ -2,11 +2,13 @@ import React from "react";
 import Link from "next/link";
 import { UserButton } from "@clerk/nextjs";
 
-interface Props {
-  logOut: () => void;
-}
-
 function Navbar() {
+
+  const toggleMenu = () => {
+    const menu = document.getElementById("mobile-menu-2");
+    menu?.classList.toggle("hidden");
+  };
+
   return (
     <nav className="bg-white border-gray-200 dark:bg-gray-900">
       <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
@@ -24,7 +26,7 @@ function Navbar() {
           {/* <!-- Dropdown menu --> */}
           <UserButton />
           <button
-            data-collapse-toggle="mobile-menu-2"
+            onClick={toggleMenu}
             type="button"
             className="inline-flex items-center p-2 ml-1 text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
             aria-controls="mobile-menu-2"
@@ -46,8 +48,9 @@ function Navbar() {
             </svg>
           </button>
         </div>
+
         <div
-          className="items-center justify-between hidden w-full md:flex md:w-auto md:order-1"
+          className="hidden items-center justify-between w-full md:flex md:w-auto md:order-1"
           id="mobile-menu-2"
         >
           <ul className="flex flex-col font-medium p-4 md:p-0 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:flex-row md:space-x-8 md:mt-0 md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
